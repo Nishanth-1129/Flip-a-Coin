@@ -1,22 +1,31 @@
 const button = document.querySelector('#flip');
 const status = document.querySelector('#status');
-
-function deferFn(callback, ms){
-  setTimeout(callback, ms);
-}
+const coin = document.querySelector('#coin'); // Added this missing line
 
 function processResult(result) {
-  status.innerText = result.toUpperCase();
+    status.innerText = "It's " + result.toUpperCase() + "!";
+    button.disabled = false; // Re-enable button after flip
 }
 
-function flipCoin(){
-  coin.setAttribute('class', '');
-  const random = Math.random();
-  const result = random < 0.5 ? 'heads' : 'tails';
-  deferFn(function(){
-    coin.setAttribute('class', 'animate-' + result);
-    deferFn(processResult.bind(null, result), 2900);
-  }, 100);
+function flipCoin() {
+    // 1. Reset state
+    coin.className = ''; 
+    status.innerText = "Flipping...";
+    button.disabled = true; // Prevent double-clicking during animation
+
+    // 2. Determine result
+    const result = Math.random() < 0.5 ? 'heads' : 'tails';
+
+    // 3. Trigger animation
+    // We use a tiny timeout to allow the browser to register the class removal above
+    setTimeout(() => {
+        coin.classList.add('animate-' + result);
+        
+        // 4. Show result after animation (3 seconds)
+        setTimeout(() => {
+            processResult(result);
+        }, 2900);
+    }, 100);
 }
 
-button.addEventListener('click', flipCoin)
+button.addEventListener('click', flipCoin);
