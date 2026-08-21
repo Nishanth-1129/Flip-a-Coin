@@ -2,23 +2,89 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coin Flip</title>
-    <!-- CSS File -->
+    <title>Chrono-Flip: Dimension Toss</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <div id="coin">
-            <div id="heads" class="heads"></div>
-            <div id="tails" class="tails"></div>
+
+    <div class="app-card">
+        <h1 class="quantum-title">CHRONO-FLIP</h1>
+        <p class="subtitle">DIMENSION TOSS</p>
+
+        <div class="mode-container">
+            <span class="section-label">Game Mode</span>
+            <select id="gameModeSelect" class="mode-select">
+                <option value="bestOf3">🏆 Best of 3 Tournament</option>
+                <option value="targetScore">🎯 Target Score (First to 5)</option>
+                <option value="streakMode">🔥 Quantum Streak</option>
+                <option value="freePlay">♾️ Free Lab</option>
+            </select>
         </div>
-        <button id="flip">Flip the Coin</button>
-        <p><span id="status"></span></p>
+
+        <div class="stage-container" id="stageWrapper">
+            <canvas id="stageCanvas" width="320" height="240"></canvas>
+            <div id="chargeBarContainer" class="charge-bar-container">
+                <div id="chargeBar" class="charge-bar"></div>
+            </div>
+            <div id="victoryOverlay" class="victory-overlay hidden">
+                <span id="victoryTitle" class="victory-title">DIMENSION CONQUERED! 🌌</span>
+                <button id="claimBtn" class="claim-btn">Re-Initialize</button>
+            </div>
+        </div>
+
+        <div class="mode-container">
+            <span class="section-label">Reality Engine</span>
+            <select id="flipModeSelect" class="mode-select">
+                <option value="fair">🎲 Fair Flip (50/50)</option>
+                <option value="alwaysWin">🌟 Quantum Lock (Always Win)</option>
+                <option value="heavyHeads">⚖️ Quantum Bias (75% Heads)</option>
+                <option value="heavyTails">⚖️ Quantum Bias (75% Tails)</option>
+            </select>
+        </div>
+
+        <div class="prediction-container">
+            <span class="section-label">Target State</span>
+            <div class="choice-buttons">
+                <button class="choice-btn active" data-choice="heads">Heads</button>
+                <button class="choice-btn" data-choice="tails">Tails</button>
+            </div>
+        </div>
+
+        <div class="status-container">
+            <p id="status">Hold FLIP to charge kinetic energy!</p>
+        </div>
+
+        <button id="flip">HOLD TO CHARGE & FLIP</button>
+
+        <div class="controls-row">
+            <button id="skinBtn" class="sub-btn">Avatar: Cyber</button>
+            <button id="coinStyleBtn" class="sub-btn">Core: Cyber Gold</button>
+            <button id="resetBtn" class="sub-btn danger">Reset</button>
+        </div>
+
+        <div class="stats-board">
+            <div class="stat-box">
+                <span class="stat-title" id="targetLabel">Target</span>
+                <span class="stat-value" id="targetValue">3 Wins</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-title">Wins</span>
+                <span class="stat-value" id="stat-wins">0</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-title">Streak</span>
+                <span class="stat-value" id="stat-streak">0</span>
+            </div>
+        </div>
+
+        <div class="history-container">
+            <span class="history-title">Timeline History</span>
+            <div class="history-tags" id="historyTags"></div>
+        </div>
     </div>
 
-    <!-- Javascript File -->
     <script src="script.js"></script>
 </body>
 </html>
